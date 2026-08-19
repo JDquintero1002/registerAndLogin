@@ -1,6 +1,6 @@
-<h2> Iniciar Sesion</h2>
+<h2>Iniciar Sesion</h2>
 
-<input type="text" placeholder="Digite el nombre de usuario">
-<input type="text" placeholder=" Digite ">
-<button (click)="login()" >login</button>
-<button (click)="registro()" >Register</button>
+<input type="text" placeholder="Ingrese su nombre de usuario" [ngModel]="usuario.username">
+<input type="text" placeholder="Ingrese su contraseña" [ngModel]="usuario.password">
+<button (click)="login()">Login</button>
+<button (click)="registro()">Registrarse</button>
