@@ -11,35 +11,45 @@ import { Router } from '@angular/router';
   styleUrl: './register.css',
 })
 export class Register {
-  
-  // la estructura de datos que enviamops al backend
-   usuario= {
-    username:'',
-    email:'',
-    password: ''
+  usuario = {
+    username: '',
+    email: '',
+    password: '',
   };
 
-  constructor(private http:HttpClient, private router:Router){}
-   registro(){
-    if(this.usuario.username !="" && this.usuario.email !="" && this.usuario.password){
-    this.http.post("http://127.0.0.1:8000/api/usuarios/registro/", 
-      this.usuario).subscribe({
-        next:(respuesta:any)=>{
-          console.log(respuesta)
-          if(respuesta.mensaje && respuesta.token){
-            alert(respuesta.mensaje)
-            this.router.navigate(['/dashboar'])
-          }  
+  mensajeError: string = '';
+  mensajeExito: string = '';
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  registro() {
+    this.mensajeError = '';
+    this.mensajeExito = '';
+
+    if (this.usuario.username !== '' && this.usuario.email !== '' && this.usuario.password !== '') {
+      this.http.post('http://localhost:3000/api/registro', this.usuario).subscribe({
+        next: (respuesta: any) => {
+          console.log(respuesta);
+          this.mensajeExito = respuesta.mensaje;
+          if (respuesta.token) {
+            localStorage.setItem('token', respuesta.token);
+            localStorage.setItem('username', this.usuario.username);
+          }
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1500);
         },
-        error:(error)=>{
-          console.log(error)
-          //alert(r)
-          
-        }
-      })
+        error: (error) => {
+          console.log(error);
+          this.mensajeError = error.error?.mensaje || 'Error al registrar. Intenta de nuevo.';
+        },
+      });
+    } else {
+      this.mensajeError = 'Todos los campos son obligatorios.';
     }
-    else{
-      alert("todos los campos son obligatorios")
-    }
-   }
+  }
+
+  irLogin() {
+    this.router.navigate(['/']);
+  }
 }

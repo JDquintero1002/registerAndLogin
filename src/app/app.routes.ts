@@ -5,6 +5,6 @@ import { Dashboard } from './dashboard/dashboard';
 export const routes: Routes = [
     {path: "", component: Login},
     {path: 'registro', component:Register},
-    {path: 'dashboar', component:Dashboard},
+    {path: 'dashboard', component:Dashboard},
    
 ];

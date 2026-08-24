@@ -1,6 +1,81 @@
-<h2> registro</h2>
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
 
-<input type="text" placeholder="escribar username" [(ngModel)]="usuario.username">
-<input type="text" placeholder=" escribar email" [(ngModel)]="usuario.email">
-<input type="text" placeholder=" escribar password" [(ngModel)]="usuario.password">
-<button (click)="registro()" >Registrarse</button>
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-500 rounded-2xl mb-4 shadow-lg shadow-emerald-500/30">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+        </svg>
+      </div>
+      <h1 class="text-3xl font-bold text-white tracking-tight">Crear cuenta</h1>
+      <p class="text-slate-400 mt-1 text-sm">Completa el formulario para registrarte</p>
+    </div>
+
+    <div class="bg-slate-800/60 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 shadow-2xl">
+
+      <div *ngIf="mensajeError"
+        class="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-xl px-4 py-3 mb-6">
+        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+            clip-rule="evenodd"/>
+        </svg>
+        {{ mensajeError }}
+      </div>
+
+      <div *ngIf="mensajeExito"
+        class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm rounded-xl px-4 py-3 mb-6">
+        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"/>
+        </svg>
+        {{ mensajeExito }}
+      </div>
+
+      <div class="mb-5">
+        <label class="block text-sm font-medium text-slate-300 mb-2">Usuario</label>
+        <input type="text" placeholder="Elige un nombre de usuario" [(ngModel)]="usuario.username"
+          class="w-full bg-slate-900/70 border border-slate-600 text-white placeholder-slate-500
+                 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500
+                 focus:ring-1 focus:ring-emerald-500 transition-colors duration-200"/>
+      </div>
+
+      <div class="mb-5">
+        <label class="block text-sm font-medium text-slate-300 mb-2">Correo electrónico</label>
+        <input type="email" placeholder="tucorreo@ejemplo.com" [(ngModel)]="usuario.email"
+          class="w-full bg-slate-900/70 border border-slate-600 text-white placeholder-slate-500
+                 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500
+                 focus:ring-1 focus:ring-emerald-500 transition-colors duration-200"/>
+      </div>
+
+      <div class="mb-7">
+        <label class="block text-sm font-medium text-slate-300 mb-2">Contraseña</label>
+        <input type="password" placeholder="Mínimo 6 caracteres" [(ngModel)]="usuario.password"
+          class="w-full bg-slate-900/70 border border-slate-600 text-white placeholder-slate-500
+                 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500
+                 focus:ring-1 focus:ring-emerald-500 transition-colors duration-200"/>
+      </div>
+
+      <button (click)="registro()"
+        class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-semibold
+               py-3 rounded-xl transition-colors duration-200 shadow-lg shadow-emerald-600/30 mb-4">
+        Registrarme
+      </button>
+
+      <div class="flex items-center gap-3 my-4">
+        <div class="flex-1 h-px bg-slate-700"></div>
+        <span class="text-slate-500 text-xs">¿Ya tienes cuenta?</span>
+        <div class="flex-1 h-px bg-slate-700"></div>
+      </div>
+
+      <button (click)="irLogin()"
+        class="w-full bg-transparent border border-slate-600 hover:border-slate-400 text-slate-300
+               hover:text-white font-medium py-3 rounded-xl transition-colors duration-200">
+        Iniciar sesión
+      </button>
+
+    </div>
+  </div>
+</div>
