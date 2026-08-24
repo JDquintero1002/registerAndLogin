@@ -1,23 +1,29 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { Observable, BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn:'root'
+  providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl = 'http://127.0.0.1:8000/api';
-    
+  private apiUrl = 'http://localhost:3000/api';
 
-    // observable para saber si el usuario esta autenticado
-    private usuarioAutenticadoSubject = new BehaviorSubject<Boolean>(this.hayToken());
-    public usuarioAutenticado$ = this.usuarioAutenticadoSubject.asObservable();
+  constructor(private http: HttpClient) {}
 
-    constructor(
-        private http: HttpClient,
-        private router: Router
-    ){}
+  register(userData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, userData);
+  }
 
-    // registro
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials);
+  }
+
+  // Guardar Token 
+  setToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 }
